@@ -1,0 +1,377 @@
+2016-09-11 08:22:49 [scrapy] INFO: Scrapy 1.1.1 started (bot: s_c_stock)
+2016-09-11 08:22:49 [scrapy] INFO: Overridden settings: {'BOT_NAME': 's_c_stock', 'NEWSPIDER_MODULE': 's_c_stock.spiders', 'SPIDER_MODULES': ['s_c_stock.spiders']}
+2016-09-11 08:22:49 [scrapy] INFO: Enabled extensions:
+['scrapy.extensions.corestats.CoreStats',
+ 'scrapy.extensions.logstats.LogStats']
+2016-09-11 08:22:49 [scrapy] INFO: Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+ 'scrapy.downloadermiddlewares.chunked.ChunkedTransferMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2016-09-11 08:22:49 [scrapy] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2016-09-11 08:22:49 [scrapy] INFO: Enabled item pipelines:
+['s_c_stock.pipelines.SCStockPipeline']
+2016-09-11 08:22:49 [scrapy] INFO: Spider opened
+2016-09-11 08:22:49 [scrapy] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2016-09-11 08:22:50 [scrapy] DEBUG: Crawled (200) <GET http://www.cs.com.cn/ssgs/gsxw/> (referer: None)
+2016-09-11 08:22:50 [scrapy] DEBUG: Crawled (200) <GET http://roll.finance.sina.com.cn/finance/zq1/ssgs/index_1.shtml> (referer: None)
+2016-09-11 08:22:50 [scrapy] DEBUG: Crawled (200) <GET http://ggjd.cnstock.com/gglist/search/ggkx/0> (referer: None)
+2016-09-11 08:22:50 [scrapy] DEBUG: Crawled (200) <GET http://ggjd.cnstock.com/gglist/search/qmtbbdj/0> (referer: None)
+2016-09-11 08:22:50 [scrapy] DEBUG: Crawled (200) <GET http://kuaixun.stcn.com/company/internal/1.shtml> (referer: None)
+2016-09-11 08:22:50 [scrapy] DEBUG: Crawled (200) <GET http://company.stcn.com/gsxw/1.shtml> (referer: None)
+2016-09-11 08:22:50 [scrapy] DEBUG: Crawled (200) <GET http://finance.eastmoney.com/news/cgsxw_1.html> (referer: None)
+2016-09-11 08:22:50 [scrapy] ERROR: Spider error processing <GET http://finance.eastmoney.com/news/cgsxw_1.html> (referer: None)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/scrapy/utils/defer.py", line 102, in iter_errback
+    yield next(it)
+  File "/usr/local/lib/python3.4/dist-packages/scrapy/spidermiddlewares/offsite.py", line 29, in process_spider_output
+    for x in result:
+  File "/usr/local/lib/python3.4/dist-packages/scrapy/spidermiddlewares/referer.py", line 22, in <genexpr>
+    return (_set_referer(r) for r in result or ())
+  File "/usr/local/lib/python3.4/dist-packages/scrapy/spidermiddlewares/urllength.py", line 37, in <genexpr>
+    return (r for r in result or () if _filter(r))
+  File "/usr/local/lib/python3.4/dist-packages/scrapy/spidermiddlewares/depth.py", line 58, in <genexpr>
+    return (r for r in result or () if _filter(r))
+  File "/root/CS/daohua_cs/s_c_stock/s_c_stock/spiders/choose_stock.py", line 155, in parse_url5
+    datetime_first = response.xpath('//div[@class="mainCont"]/div/div/ul/li/span/text()')[0].extract()  # 第一条消息时间
+  File "/usr/local/lib/python3.4/dist-packages/parsel/selector.py", line 58, in __getitem__
+    o = super(SelectorList, self).__getitem__(pos)
+IndexError: list index out of range
+2016-09-11 08:23:23 [scrapy] DEBUG: Crawled (200) <GET http://stock.hexun.com/gsxw/> (referer: None)
+2016-09-11 08:23:23 [scrapy] INFO: Closing spider (finished)
+2016-09-11 08:23:23 [scrapy] INFO: Dumping Scrapy stats:
+{'downloader/request_bytes': 1862,
+ 'downloader/request_count': 8,
+ 'downloader/request_method_count/GET': 8,
+ 'downloader/response_bytes': 173145,
+ 'downloader/response_count': 8,
+ 'downloader/response_status_count/200': 8,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2016, 9, 11, 0, 23, 23, 588160),
+ 'log_count/DEBUG': 8,
+ 'log_count/ERROR': 1,
+ 'log_count/INFO': 7,
+ 'response_received_count': 8,
+ 'scheduler/dequeued': 8,
+ 'scheduler/dequeued/memory': 8,
+ 'scheduler/enqueued': 8,
+ 'scheduler/enqueued/memory': 8,
+ 'spider_exceptions/IndexError': 1,
+ 'start_time': datetime.datetime(2016, 9, 11, 0, 22, 49, 883131)}
+2016-09-11 08:23:23 [scrapy] INFO: Spider closed (finished)
+中证网
+新浪网
+中国证券网
+中国证券网
+证券时报网
+证券时报网
+东方财富网
+和讯网
+新浪网
+中证网
+中国证券网
+东方财富网
+证券时报网
+证券时报网
+和讯网
+中国证券网
+新浪网
+中证网
+东方财富网
+中国证券网
+list index out of range
+list index out of range
+证券时报网
+中国证券网
+list index out of range
+list index out of range
+证券时报网
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '美盈森签订农地开发合作合同 投资15亿开发2000余' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '百视通与NBA全面拓展长期战略合作关系' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '万科A：两起诉小股东不具备诉讼主体资格' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '10月11日利好公告待爆发' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '搜于特拟投资1000万元设立全资子公司' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '10日午间公告:星美联合拟非公开发行股票购买欢' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '10月11日重要增减持公告: 金通灵控股股东拟增持' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '东方航空与滴滴达成战略合作 布局空地联运生态' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '10月10日晚间上市公司利好消息一览' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '华西股份前三季净利预增670%至720% 减持东海证券' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '金马股份重组拟作价116亿元收购众泰汽车' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '中国联通或将进行混合所有制改革' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '国投安信拟定增募资80亿元 11日复牌' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry 'ST生化再遭股民起诉信批违规 巨额索赔潮何时休' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '四川双马11日起停牌 拟披露要约收购结果' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '东方精工47.5亿并购普莱德' for key 'name'")
+中国证券网
+list index out of range
+list index out of range
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '醋化股份股东产控集团披露减持计划' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '金通灵控股股东披露增持计划' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '泰尔重工终止资产重组事项' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '英力特卖壳欲分步走 重组夭折后控股股东拟清仓' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '星美联合更新财务数据 欢瑞世纪与腾讯战略合作' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '南通锻压并购重组申请未获证监会审核通过' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '金马股份拟作价116亿元收购众泰汽车' for key 'name'")
+****************************************************************
+****************************************************************
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '华夏人寿集中竞价违规减持希努尔 遭证监会警示' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '瀚华金控携手中民投租赁助力北京绿色出行' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '星美联合披露欢瑞世纪半年报 重组进入收官阶段' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '赞宇科技股东解除一致行动人 拟设并购基金' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '创维数字收购液晶器件49%股权获商务部同意' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '三公司停牌筹划收购资产' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '时代万恒股东张允三披露减持计划' for key 'name'")
+****************************************************************
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '或影响10月11日股价的重要公告（更新中）:金马' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '大股东减持真实意图屡遭问询 参投并购基金不可' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '天药股份重组需重走程序 收购标的被立案调查' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '13公司临停 媒体称三安光电拟收购欧司朗' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '*ST川化重整计划：拟10转17.02股予重整投资人' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '四维图新高溢价收购案之谜至今存疑 专家称交易' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '洲际油气重组交易对方变更遭问询' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '10月解禁规模十年最低 本周神州长城减持压力大' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '东方精工47.5亿并购普莱德 进军新能源电池领域' for key 'name'")
+****************************************************************
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '南山控股吸并深基地B暂时中止 B转A重组好事多磨' for key 'name'")
+****************************************************************
+****************************************************************
+新浪网
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '深深房A：与恒大签署重组上市合作协议 有效期7' for key 'name'")
+****************************************************************
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '四维图新高溢价收购案至今存疑 专家称交易结构' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '国栋建设重组未成再通款曲 大股东去意已决拟转' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '12家上市公司终止股票回购 “食言”回购损信用' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '洲际油气重组可谓一波三折 交易对方变更遭问询' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '天药股份收购标的被国家食药监总局立案调查' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '星美联合重大资产重组获批更进一步' for key 'name'")
+和讯网
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '创维数字收购液晶器件49%股权获商务部同意 ' for key 'name'")
+****************************************************************
+中证网
+东方财富网
+证券时报网
+新浪网
+证券时报网
+中国证券网
+list index out of range
+list index out of range
+中国证券网
+list index out of range
+list index out of range
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '京粮集团拟2.2亿元增持*ST珠江 依托上市公司打造' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '绿地控股拟斥资51亿入股协信远创 和汉威重庆并' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '明家联合实控人拟最多减持11.33%股份 套现10亿元' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '九鼎投资再现大额质押 大股东质押占比近97%' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '高送转概念活跃 煌上煌涨近9%' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '欣龙控股拟发行股份和支付现金购买华卫药业100%' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '绿地控股拟斥资51亿入股协信远创' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '长信科技拟购比克动力 保控制权董事长突击入股' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '绿地控股拟入股协信远创 并列第一大股东' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '奥克股份收购利仁新能源100%股权' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '新洋丰子公司股东增持被疑低于承诺 公司回应转' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '*ST景谷前大股东清仓离场 业内专家猜测明年存重' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '绿地控股拟52亿收购协信远创40%股权 成为并列第' for key 'name'")
+****************************************************************
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '江南化工停牌筹划收购事项' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '中水渔业2.2亿买来烫手山芋 新阳洲被申请破产清' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '豫园商城拟约2.4亿元投资韩国普光公司' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '华录百纳董事减持公司股份' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '央企整合有序推进 中国恒天与国机集团重组' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '上交所二次问询精达股份重组   仍关注标的资产' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '博济医药股东披露减持计划' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '中原高速与海南高速签订战略合作协议' for key 'name'")
+新浪网
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '祈福生活服务香港联交所挂牌上市 将借力资本开' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '天津磁卡遭股东减持150.1万股' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '双星新材拟投资2亿元控股膜材料公司' for key 'name'")
+****************************************************************
+东方财富网
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '恒大弹药足但大多不能投A股 增持空间收窄' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '天津丰利蛇吞象式并购B面：17倍杠杆的危险游戏' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '长信科技拟购比克动力保控制权 董事长突击入股' for key 'name'")
+****************************************************************
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '奥克股份收购阜宁利仁100%股权' for key 'name'")
+****************************************************************
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '小市值“国企壳”或迎投资机遇 借力资本平台混' for key 'name'")
+****************************************************************
+****************************************************************
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '仁智股份财技晃过监管？ 收购标的净利率两年涨' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '国资改革成市场风口 上海等三区域概念股吸金逾' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '昌九生化重现披星戴帽 变卖家产终止谋求转让遭' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '一汽夏利遭大幅减持股价不降反升 投资人称“业' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '11月11日晚间上市公司利好消息一览' for key 'name'")
+****************************************************************
+****************************************************************
+****************************************************************
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '中水渔业2.2亿买来“烫手山芋”新阳洲被申请破' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '银鸽投资拍卖结果藏身于进展公告 鳌迎投资拟接' for key 'name'")
+****************************************************************
+****************************************************************
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '得润电子拟收购柳州双飞60%股权' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '国中水务拟1.49亿元参与投资设立润中人寿' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '昌九生化收问询函 复牌交易12天因控股权可能变' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '中国恒天整体无偿划入国机集团 央企重组接连不' for key 'name'")
+****************************************************************
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '绿地控股拟52亿元收购协信远创40%股权' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '华策影视携手景域文化 跨界合作谋旅游大产业' for key 'name'")
+和讯网
+****************************************************************
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '股市减持套现的巨资去向：有用于移民和“来钱' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '天源迪科谢晓宾大宗交易减持违规 深圳证监局对' for key 'name'")
+****************************************************************
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '英唐智控郑汉辉和古远东减持违规 深圳证监局对' for key 'name'")
+****************************************************************
+****************************************************************
+****************************************************************
+****************************************************************
+****************************************************************
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry 'ST展唐被收购方信披违规 遭证监局出具警示函 ' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '九鼎投资：控股股东累计质押公司股份达70%' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '佰惠生信息披露屡次违规 内蒙古证监局对其出具' for key 'name'")
+****************************************************************
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '中资入股的巴西里贝拉油田第一口油井顺利完井' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '欣龙控股推进资产重组 拟8.3亿元收购两家中药公' for key 'name'")
+****************************************************************
+****************************************************************
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '一汽夏利遭大幅减持股价不降反升 业绩越差上市' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '明家联合实控人拟最多减持11.33%股份 套现10亿元' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '复牌交易12天因控股权可能变动停牌 昌九生化收' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '拍卖结果藏身于进展公告 鳌迎投资拟接手银鸽投' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '绿地控股拟投资协信远创40%股权' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '蛇吞象式并购B面：17倍杠杆的危险游戏 ' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '天山生物重组标的业绩“变脸” 业绩陷入亏损窘' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '奥克股份拟2400万收购亏损公司阜宁利仁100%股权' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '均衡各方利益 格力电器优化收购方案' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '增持空间收窄 恒大弹药足但大多不能投A股 ' for key 'name'")
+****************************************************************
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '子公司股东增持被疑“没买够” 新洋丰：股权转' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '九鼎投资再现大额质押大股东质押占比近97%' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '京粮集团重组上市公司' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '中水渔业2.2亿买来烫手山芋 新阳洲被申请破产清' for key 'name'")
+****************************************************************
+Insert Error_guagua: (1062, "Duplicate entry '央企整合有序推进中国恒天与国机集团重组' for key 'name'")
+****************************************************************

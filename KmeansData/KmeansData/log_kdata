@@ -1,0 +1,2 @@
+2016-08-02 01:05:26 [scrapy] INFO: Scrapy 1.1.1 started (bot: KmeansData)
+2016-08-02 01:05:26 [scrapy] INFO: Overridden settings: {'LOG_FILE': 'log_kdata', 'AUTOTHROTTLE_ENABLED': True, 'SPIDER_MODULES': ['KmeansData.spiders'], 'LOG_ENABLED': False, 'NEWSPIDER_MODULE': 'KmeansData.spiders', 'BOT_NAME': 'KmeansData'}

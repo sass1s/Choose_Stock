@@ -1,0 +1,6 @@
+1,31 17-23 * * * sh /root/CS/daohua_cs/init_scrapy_news.sh >/dev/null 2>&1
+1,31 0-15 * * * sh /root/CS/daohua_cs/init_scrapy_news.sh >/dev/null 2>&1
+30,40 15 * * * sh /root/CS/daohua_cs/init_scrapy_kdata.sh >/dev/null 2>&1
+1,31 16 * * * sh /root/CS/daohua_cs/init_scrapy_cdata.sh >/dev/null 2>&1
+1 0 * * * sh /root/CS/daohua_cs/reload_uwsgi.sh >/dev/null 2>&1
+

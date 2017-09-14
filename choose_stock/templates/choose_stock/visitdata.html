@@ -1,0 +1,75 @@
+{% extends 'choose_stock/base.html' %}
+{% load static %}
+
+{% block main %}
+{#    {{ request.META }}#}
+    <table class="table table-bordered table-responsive" style="margin-bottom: 40px">
+        <caption>今日访客统计</caption>
+        <thead>
+        <tr style="font-size: 12px">
+            <th>序号</th>
+            <th>IP地址</th>
+            <th>访问时间</th>
+            <th>访问页面</th>
+            <th>访问设备</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for each_visit in visits_today %}
+            <tr>
+                <td>
+                    {{ forloop.counter }}
+                </td>
+                <td>
+                    {{ each_visit.ip_address }} {# ip地址 #}
+                </td>
+                <td>
+                    {{ each_visit.visit_time | date:"m-d H:i" }}{# 访问时间 #}
+                </td>
+                <td>
+                    {{ each_visit.visit_page }} {# 访问页面 #}
+                </td>
+                <td>
+                    {{ each_visit.visit_device }}{# 访问设备 #}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+
+    <table class="table table-bordered table-responsive" style="margin-bottom: 40px">
+        <caption>昨日访客统计</caption>
+        <thead>
+        <tr style="font-size: 12px">
+            <th>序号</th>
+            <th>IP地址</th>
+            <th>访问时间</th>
+            <th>访问页面</th>
+            <th>访问设备</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for each_visit in visits_yes %}
+            <tr>
+                <td>
+                    {{ forloop.counter }}
+                </td>
+                <td>
+                    {{ each_visit.ip_address }} {# ip地址 #}
+                </td>
+                <td>
+                    {{ each_visit.visit_time | date:"m-d H:i" }}{# 访问时间 #}
+                </td>
+                <td>
+                    {{ each_visit.visit_page }} {# 访问页面 #}
+                </td>
+                <td>
+                    {{ each_visit.visit_device }}{# 访问设备 #}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+{% endblock %}

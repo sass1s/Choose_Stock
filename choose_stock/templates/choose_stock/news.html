@@ -1,0 +1,111 @@
+{% extends 'choose_stock/base.html' %}
+{% load static %}
+
+{% block main %}
+    <style>
+        li {
+            font-size: 18px;
+        {#        margin-bottom: 18px;#}
+        }
+    </style>
+    <h3 class="text-center">----今日要闻----</h3>
+    {% if news_today_pos %}
+        <h4 class="text-center">利好消息</h4>
+        <ul style="margin-bottom: 40px;padding-left: 0px">
+            {% for each_news in news_today_pos %}
+                <li style="list-style-type: none">
+                    <p>
+                        {{ each_news.published_time | date:"m-d H:i" }}
+                        <a href="{% url 'news_detail' pk=each_news.pk %}">{{ each_news.name }}</a>
+                    </p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if news_today_neg %}
+        <h4 class="text-center">利空消息</h4>
+        <ul style="margin-bottom: 40px;padding-left: 0px">
+            {% for each_news in news_today_neg %}
+                <li style="list-style-type: none">
+                    <p>
+                        {{ each_news.published_time | date:"m-d H:i" }}
+                        <a href="{% url 'news_detail' pk=each_news.pk %}">{{ each_news.name }}</a>
+                    </p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+
+    <h3 class="text-center">----昨日要闻----</h3>
+    {% if news_yes_pos %}
+        <h4 class="text-center">利好消息</h4>
+        <ul style="margin-bottom: 40px;padding-left: 0px">
+            {% for each_news in news_yes_pos %}
+                <li style="list-style-type: none">
+                    <p>
+                        {{ each_news.published_time | date:"m-d H:i" }}
+                        <a href="{% url 'news_detail' pk=each_news.pk %}">{{ each_news.name }}</a>
+                    </p>
+
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if news_yes_neg %}
+        <h4 class="text-center">利空消息</h4>
+        <ul style="margin-bottom: 40px;padding-left: 0px">
+            {% for each_news in news_yes_neg %}
+                <li style="list-style-type: none">
+                    <p>
+                        {{ each_news.published_time | date:"m-d H:i" }}
+                        <a href="{% url 'news_detail' pk=each_news.pk %}">{{ each_news.name }}</a>
+                    </p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+
+    <h3 class="text-center">----前日要闻----</h3>
+    {% if news_be_yes_pos %}
+        <h4 class="text-center">利好消息</h4>
+        <ul style="margin-bottom: 40px;padding-left: 0px">
+            {% for each_news in news_be_yes_pos %}
+                <li style="list-style-type: none">
+                    <p>
+                        {{ each_news.published_time | date:"m-d H:i" }}
+                        <a href="{% url 'news_detail' pk=each_news.pk %}">{{ each_news.name }}</a>
+                    </p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if news_be_yes_neg %}
+        <h4 class="text-center">利空消息</h4>
+        <ul style="margin-bottom: 40px;padding-left: 0px">
+            {% for each_news in news_be_yes_neg %}
+                <li style="list-style-type: none">
+                    <p>
+                        {{ each_news.published_time | date:"m-d H:i" }}
+                        <a href="{% url 'news_detail' pk=each_news.pk %}">{{ each_news.name }}</a>
+                    </p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+{% endblock %}
+
+{#{% block footer %}  {# 自定义footer #}
+{#    <div class="footer" style="position: relative">#}
+{#        <div class="container-fluid">#}
+{#            <div>#}
+{#                <p class="text-center">版权所有&copy;盗花</p>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#{% endblock %}#}

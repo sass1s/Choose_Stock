@@ -1,0 +1,342 @@
+{% extends 'choose_stock/base.html' %}
+{% load static %}
+
+{% block main %}
+    <style type="text/css">
+        .table th, .table td {
+            text-align: center;
+        }
+
+    </style>
+
+    <h2 class="text-center">资金面选股</h2>
+
+    {% if stocks_yes %}
+        <table class="table table-bordered table-responsive table-hover">
+            <caption>上一交易日推荐股票回测({{ trade_day | date:'n' }}月{{ trade_day | date:'d' }}日17:00后更新)</caption>
+            {# date:'n' 表示月份前的0省略,如01月为1月 #}
+            <thead>
+            <tr style="font-size: 12px">
+                <th>序号</th>
+                <th>股票名称</th>
+                <th>股票代码</th>
+                <th>{{ trade_day | date:'m-d' }}涨跌</th>
+                <th>涨跌排名</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for stock in stocks_yes %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>
+                        <a href="{% url 'stock_detail' stock_id=stock.stock_id %}" target="_blank">
+                            {{ stock.stock_name }}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'stock_detail' stock_id=stock.stock_id %}" target="_blank">
+                            {{ stock.stock_id }}
+                        </a>
+                    </td>
+                    <td>{{ stock.var_degree }}</td>
+                    {# var_degree的数据没有提取到股票数据中 #}
+                    <td>{{ stock.var_count }}</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="3" class="text-center">平均值</td>
+                <td>{{ average_var }}</td>
+                <td>{{ average_count }}</td>
+            </tr>
+            <tr style="text-align: center" id="lastline">  {# 结果评述 #}
+                <td>结果<br>评述</td>
+                <td colspan="4" id="comment" style="vertical-align: middle"></td>
+            </tr>
+            </tbody>
+        </table>
+        <p style="font-size: 12px">注:两市约有2800只股票参与交易.</p>
+    {% endif %}
+
+    {# 对结果评述做样式修改 #}
+    <script type="text/javascript">
+        var ave = {{ average_count }};
+        var com = document.getElementById("comment");
+        if (ave <= 500) {
+            com.innerHTML = "整体盈利完胜大盘!";
+            com.style.color = "red";
+            com.style.fontWeight = "bold";
+            com.style.fontSize = "20px";
+        } else if (ave <= 800) {
+            com.innerHTML = "整体盈利远超大盘!";
+            com.style.color = "red";
+            com.style.fontWeight = "bold";
+            com.style.fontSize = "20px";
+        } else if (ave <= 1300) {
+            com.innerHTML = "整体盈利高于大盘!";
+            com.style.color = "red";
+        } else if (ave <= 1500) {
+            com.innerHTML = "整体盈利与大盘基本持平";
+        } else {
+            com.innerHTML = "整体盈利低于大盘";
+            com.style.color = "green";
+            document.getElementById("lastline").style.display = "none";  {# 此时不显示结果评述行 #}
+        }
+    </script>
+
+    <hr>
+
+    <h4>下一交易日股票参考(每日17:00后更新)</h4>
+    {% if stocks %}
+        {% for stock in stocks %}
+            {{ forloop.counter }}
+            <h4 class="text-center" style="margin-bottom: 0;margin-top: 0">
+                <a href="{% url 'stock_detail' stock_id=stock.stock_id %}" target="_blank">
+                    {{ stock.stock_name }}({{ stock.stock_id }})
+                </a>资金流图
+            </h4>
+            <div id="{{ stock.stock_id }}" style="width: 100%;height: 500px;margin-bottom: 40px"></div>
+            <hr>
+
+
+            <script type="text/javascript">
+                var myChart = echarts.init(document.getElementById('{{ stock.stock_id }}'));
+                {#                var data0 = {{ stock.control_type | safe }};#}
+
+                var option = {
+                    {#                title: {#}
+                    {#                    text: '{{ stock.stock_name }}({{ stock.stock_id }})资金流图',#}
+                    {#                    x: 'center', {# 调节居中距离 #}
+                    {#                    y: '0%'  {# 调节上下距离 #}
+                    {#                },#}
+                    legend: {
+                        data: ['主力净流入', '主力净流出', '主力净占比', '收盘价', '主力成本', '主力参与度'],
+                        left: 'right',
+                        top: '0%'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'line'
+                        },
+                        formatter: function (params) {
+                            if (params[0].seriesType == 'line') {
+                                if (params[0].seriesName == '收盘价') {
+                                    return params[0].name + '<br>' +
+                                            params[0].seriesName + params[0].value + '元' + '<br>' +
+                                            params[1].seriesName + params[1].value + '元';
+                                } else {
+                                    return params[0].name + '<br>' +
+                                            params[0].seriesName + params[0].value + '%' + '<br>' +
+                                                {{ stock.control_type | safe }}[params[0].dataIndex];
+                                    {# 血的教训,此处千万不要用data0,因为每一个javascript共用一个data0 #}
+                                }
+                            } else {
+                                var par;
+                                if (params[1].value != '-') {
+                                    par = params[1];
+                                }
+                                else {
+                                    par = params[0];
+                                }
+                                return par.name + '<br>' +
+                                        par.seriesName + Math.round(par.value) + '万元' + '<br>' +
+                                        par.seriesName + '占比' + params[2].value + '%'
+                            }
+                        }
+                    },
+                    grid: [
+                        {
+                            height: '40%'
+                        },
+                        {
+                            height: '15%',
+                            top: '57%'
+                        },
+                        {
+                            height: '15%',
+                            top: '77%'
+                        }
+                    ],
+                    xAxis: [
+                        {
+                            type: 'category',
+                            data: {{ stock.stock_date | safe }},
+                            boundaryGap: false,
+                            min: 'dataMin',
+                            max: 'dataMax'
+                        },
+                        {
+                            type: 'category',
+                            data: {{ stock.stock_date | safe }},
+                            boundaryGap: false,
+                            axisTick: {show: false},
+                            axisLabel: {show: true},
+                            min: 'dataMin',
+                            max: 'dataMax',
+                            gridIndex: 1
+                        },
+                        {
+                            type: 'category',
+                            data: {{ stock.stock_date | safe }},
+                            boundaryGap: false,
+                            axisTick: {show: false},
+                            axisLabel: {show: false},
+                            min: 'dataMin',
+                            max: 'dataMax',
+                            gridIndex: 2
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            name: '主力净流入(万元)',
+                            {#                            nameLocation: 'middle',#}
+                            nameGap: 5,
+                            nameRotate: 30,
+                            scale: true, {# 设置为true,坐标轴不用包含0刻度,更好展示细节 #}
+                            splitArea: {
+                                show: true
+                            },
+                            min: 'dataMin',
+                            max: 'dataMax'
+                        },
+                        {
+                            name: '主力净占比:%',
+                            nameGap: 5
+                        },
+                        {
+                            gridIndex: 1,
+                            scale: true
+                        },
+                        {
+                            gridIndex: 2,
+                            scale: true
+                        }
+                    ],
+                    dataZoom: [{
+                        type: 'slider',
+                        start: 50,
+                        xAxisIndex: [0, 1, 2]  {# 实现同时控制三个图的x坐标轴 #}
+                    }],
+                    series: [
+                        {
+                            name: '主力净流入', {# 必须和legend对应 #}
+                            type: 'bar',
+                            stack: '资金流',
+                            data: {{ stock.maincash_data_rise | safe}},
+                            itemStyle: {
+                                normal: {
+                                    color: 'red'
+                                }
+                            },
+                            markLine: {
+                                data: [
+                                    {
+                                        name: '平均线',
+                                        yAxis: Math.round({{ stock.average_rise }})
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            name: '主力净流出',
+                            type: 'bar',
+                            stack: '资金流',
+                            data: {{ stock.maincash_data_fall | safe }},
+                            itemStyle: {
+                                normal: {
+                                    color: 'green'
+                                }
+                            },
+                            markLine: {
+                                data: [
+                                    {
+                                        name: '平均线',
+                                        {#                                    type: 'average'#}
+                                        yAxis: Math.round({{ stock.average_fall }})
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            name: '主力净占比',
+                            type: 'line',
+                            data: {{ stock.maincash_rate | safe }},
+                            yAxisIndex: 1,
+                            symbolSize: 7,
+                            showAllSymbol: true,
+                            lineStyle: {
+                                normal: {
+                                    width: 1,
+                                    type: 'dotted'
+                                }
+                            }
+                        },
+                        {
+                            name: '收盘价',
+                            type: 'line',
+                            data: {{ stock.price_close }},
+                            xAxisIndex: 1,
+                            yAxisIndex: 2,
+                            symbolSize: 7,
+                            showAllSymbol: true,
+                            lineStyle: {
+                                normal: {
+                                    width: 1,
+                                    type: 'dotted'
+                                }
+                            }
+                        },
+                        {
+                            name: '主力成本',
+                            type: 'line',
+                            data: {{ stock.main_cost | safe }},
+                            xAxisIndex: 1,
+                            yAxisIndex: 2,
+                            symbol: 'circle',
+                            symbolSize: 7,
+                            showAllSymbol: true
+                        },
+                        {
+                            name: '主力参与度',
+                            type: 'line',
+                            data: {{ stock.join_degree | safe }},
+                            xAxisIndex: 2,
+                            yAxisIndex: 3,
+                            symbol: 'diamond',
+                            symbolSize: 10,
+                            showAllSymbol: true
+                        }
+                    ]
+                };
+                myChart.setOption(option);
+
+            </script>
+        {% endfor %}
+    {% elif time_blank %}
+        {{ time_blank }}
+    {% else %}
+        <p class="text-center text-success">今日无股票推荐</p>
+        <hr>
+    {% endif %}
+
+    {# 多说评论框 #}
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="3" data-title="资金面" data-url="{% url 'capital' %}"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name: "dhxuangu"};
+        (function () {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';
+            ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0]
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+
+
+{% endblock %}
